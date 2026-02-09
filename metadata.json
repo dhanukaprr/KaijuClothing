@@ -1,0 +1,7 @@
+{
+  "name": "Kaiju - Modern Japanese Attire",
+  "description": "Minimalist Japanese-inspired fashion with an avant-garde edge.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
