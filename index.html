@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      // Shim to prevent "process is not defined" error on static hosting
+      window.process = window.process || { env: {} };
+    </script>
     <style>
       body {
         font-family: 'Inter', sans-serif;
@@ -29,6 +33,11 @@
       ::-webkit-scrollbar-thumb {
         background: #000;
       }
+      
+      /* Global fade in for the whole app to prevent FOUC */
+      #root:empty {
+        background: #fff;
+      }
     </style>
     <script type="importmap">
     {
@@ -44,5 +53,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- The entry point script to boot the React application -->
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>

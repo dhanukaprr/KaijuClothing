@@ -90,34 +90,34 @@ const App: React.FC = () => {
 
       <main className="flex-1 flex overflow-hidden">
         {/* Left Section: Showcase */}
-        <section className="relative w-3/4 bg-[#f4f4f5] h-full flex items-center justify-center overflow-hidden">
+        <section className="relative w-full lg:w-3/4 bg-[#f4f4f5] h-full flex items-center justify-center overflow-hidden">
           {/* Background Decorative Element */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
-            <span className="text-[40rem] font-bold leading-none">怪獣</span>
+            <span className="text-[20rem] md:text-[40rem] font-bold leading-none">怪獣</span>
           </div>
 
           {/* Ghost Images (Left poses) */}
-          <div className="absolute left-10 top-1/2 -translate-y-1/2 flex flex-col space-y-12 opacity-30 z-0">
-            <div className="w-24 md:w-40 aspect-[3/4] overflow-hidden rounded bg-gray-200 shadow-sm">
-               <img src={product.image} className="w-full h-full object-cover grayscale brightness-110" alt="Pose 1" />
+          <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex flex-col space-y-6 md:space-y-12 opacity-30 z-0">
+            <div className="w-20 md:w-40 aspect-[3/4] overflow-hidden rounded bg-gray-200 shadow-sm transition-all duration-700">
+               <img key={`ghost-1-${product.id}`} src={product.image} className="w-full h-full object-cover grayscale brightness-110" alt="Pose 1" />
             </div>
-            <div className="w-24 md:w-40 aspect-[3/4] overflow-hidden rounded bg-gray-200 shadow-sm">
-               <img src={product.image} className="w-full h-full object-cover object-bottom" alt="Pose 2" />
+            <div className="w-20 md:w-40 aspect-[3/4] overflow-hidden rounded bg-gray-200 shadow-sm transition-all duration-700">
+               <img key={`ghost-2-${product.id}`} src={product.image} className="w-full h-full object-cover object-bottom" alt="Pose 2" />
             </div>
           </div>
 
           {/* Main Display Model */}
-          <div className="relative z-10 w-full h-full flex items-center justify-center px-20 pointer-events-none">
+          <div className="relative z-10 w-full h-full flex items-center justify-center px-4 md:px-20 pointer-events-none">
             <img 
               key={product.id}
               src={product.image} 
-              className="h-[85%] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] animate-fade-in-scale transition-all duration-700 pointer-events-auto" 
+              className="h-[70%] md:h-[85%] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] animate-fade-in-scale transition-all duration-700 pointer-events-auto" 
               alt={product.name} 
             />
           </div>
 
           {/* Slider Controls */}
-          <div className="absolute left-32 bottom-20 flex items-center space-x-4 text-[10px] font-bold tracking-widest text-gray-400 z-30">
+          <div className="absolute left-6 md:left-32 bottom-20 flex items-center space-x-4 text-[10px] font-bold tracking-widest text-gray-400 z-30 bg-white/50 backdrop-blur-sm p-2 rounded md:bg-transparent">
              <button 
                onClick={(e) => { e.stopPropagation(); prevProduct(); }} 
                className="hover:text-black flex items-center transition-colors group p-2"
@@ -139,11 +139,11 @@ const App: React.FC = () => {
             <div className="inline-block w-12 h-[1px] bg-black ml-4 align-middle"></div>
           </div>
 
-          {/* Navigation Dot Indicators */}
-          <div className="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-30">
+          {/* Navigation Circle Button (Right-side) */}
+          <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-30">
              <button 
                onClick={(e) => { e.stopPropagation(); nextProduct(); }}
-               className="w-12 h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-lg bg-white active:scale-95 transform"
+               className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-lg bg-white active:scale-95 transform"
              >
                <ChevronRight size={20} />
              </button>
@@ -158,14 +158,14 @@ const App: React.FC = () => {
               <ShoppingCart size={16} />
               <span>Add to Cart</span>
             </button>
-            <div className="w-32 bg-white flex items-center justify-center text-[10px] font-bold tracking-widest border-t border-gray-100 uppercase select-none">
+            <div className="w-24 md:w-32 bg-white flex items-center justify-center text-[10px] font-bold tracking-widest border-t border-gray-100 uppercase select-none">
               Size 42
             </div>
           </div>
         </section>
 
-        {/* Right Section: Details */}
-        <section className="w-1/4 bg-white h-full border-l border-gray-100 flex flex-col p-12 overflow-y-auto z-40">
+        {/* Right Section: Details (Hidden on small screens) */}
+        <section className="hidden lg:flex w-1/4 bg-white h-full border-l border-gray-100 flex-col p-12 overflow-y-auto z-40">
           <div className="mb-12">
             <div className="aspect-[3/4] bg-gray-50 mb-8 overflow-hidden rounded shadow-sm">
               <img 
