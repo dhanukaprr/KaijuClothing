@@ -236,7 +236,7 @@ const AIStylist = ({ onClose, onAddToCart }) => {
       <div className="relative w-full max-w-2xl bg-white h-[600px] flex flex-col">
         <div className="p-6 bg-black text-white flex justify-between items-center">
           <span className="text-[10px] font-bold uppercase tracking-[0.5em]">Stylist AI</span>
-          <button onClick={onClose}><X size={20}/></button>
+          <button onClick={onClose} className="hover:opacity-50"><X size={20}/></button>
         </div>
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-6 text-[11px] leading-relaxed">
           {messages.map((m, i) => (
@@ -244,10 +244,11 @@ const AIStylist = ({ onClose, onAddToCart }) => {
               <div className={`p-4 max-w-[80%] ${m.role === 'user' ? 'bg-black text-white' : 'bg-gray-100 text-black'}`}>{m.content}</div>
             </div>
           ))}
+          {isLoading && <div className="text-[8px] uppercase tracking-widest text-gray-400 animate-pulse">Consulting archives...</div>}
         </div>
         <form onSubmit={handleSend} className="p-6 border-t flex gap-4">
-          <input value={input} onChange={e => setInput(e.target.value)} placeholder="Inquire about collections..." className="flex-1 border-b text-xs outline-none" />
-          <button className="bg-black text-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest">Send</button>
+          <input value={input} onChange={e => setInput(e.target.value)} placeholder="Inquire about collections..." className="flex-1 border-b text-xs outline-none py-2" />
+          <button className="bg-black text-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">Send</button>
         </form>
       </div>
     </div>
@@ -292,31 +293,31 @@ const App = () => {
       
       <main className="flex-1 flex mt-20">
         <section className="relative w-full lg:w-3/4 bg-[#f8f8f8] flex items-center justify-center">
-          <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none text-[30rem] font-bold">怪獣</div>
+          <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none text-[30rem] font-bold pointer-events-none">怪獣</div>
           
-          <img key={current.id} src={current.image} className="h-[80%] object-contain drop-shadow-2xl z-10" />
+          <img key={current.id} src={current.image} className="h-[80%] object-contain drop-shadow-2xl z-10 animate-fade-in-scale" />
           
           <div className="absolute left-10 bottom-10 flex gap-4 text-[10px] font-bold tracking-[0.3em] uppercase z-20">
-            <button onClick={() => setActiveIdx((activeIdx - 1 + filtered.length) % filtered.length)}>Prev</button>
+            <button className="hover:text-red-600 transition-colors" onClick={() => setActiveIdx((activeIdx - 1 + filtered.length) % filtered.length)}>Prev</button>
             <span>/</span>
-            <button onClick={() => setActiveIdx((activeIdx + 1) % filtered.length)}>Next</button>
+            <button className="hover:text-red-600 transition-colors" onClick={() => setActiveIdx((activeIdx + 1) % filtered.length)}>Next</button>
           </div>
 
           <div className="absolute left-0 bottom-0 h-20 w-64 bg-black flex text-white z-20">
-             <button onClick={() => addToCart(current)} className="flex-1 font-bold text-[10px] tracking-widest uppercase flex items-center justify-center gap-2">
+             <button onClick={() => addToCart(current)} className="flex-1 font-bold text-[10px] tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors">
                <Plus size={14}/> Add to Cart
              </button>
           </div>
         </section>
 
-        <section className="hidden lg:flex w-1/4 border-l p-12 flex-col">
-          <h2 className="text-2xl font-bold uppercase tracking-widest mb-4">{current.name}</h2>
+        <section className="hidden lg:flex w-1/4 border-l p-12 flex-col bg-white">
+          <h2 className="text-2xl font-bold uppercase tracking-widest mb-4 leading-tight">{current.name}</h2>
           <p className="text-[11px] text-gray-400 uppercase tracking-widest mb-8">{current.category}</p>
           <p className="text-xs leading-relaxed text-gray-500 mb-12">{current.description}</p>
           <div className="text-xl font-bold mb-auto">${current.price.toFixed(2)}</div>
           
-          <button onClick={() => setIsStylistOpen(true)} className="w-full py-4 border border-black flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
-            <Sparkles size={16}/> Ask AI Stylist
+          <button onClick={() => setIsStylistOpen(true)} className="w-full py-4 border border-black flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all group">
+            <Sparkles size={16} className="group-hover:text-yellow-400"/> Ask AI Stylist
           </button>
         </section>
       </main>
