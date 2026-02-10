@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI, Type } from '@google/genai';
 import { Sparkles, Send, X, Bot, User } from 'lucide-react';
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS } from '../data/products.ts';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -78,7 +78,6 @@ const AIStylist: React.FC<AIStylistProps> = ({ onClose, onAddToCart }) => {
       <div className="fixed inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       
       <div className="relative w-full max-w-2xl bg-white rounded-none shadow-2xl overflow-hidden flex flex-col h-[650px] border border-gray-100">
-        {/* Header */}
         <div className="p-8 bg-black text-white flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <div className="p-2 border border-white/20">
@@ -94,7 +93,6 @@ const AIStylist: React.FC<AIStylistProps> = ({ onClose, onAddToCart }) => {
           </button>
         </div>
 
-        {/* Chat Area */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-6 bg-[#fafafa]">
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -122,7 +120,6 @@ const AIStylist: React.FC<AIStylistProps> = ({ onClose, onAddToCart }) => {
           )}
         </div>
 
-        {/* Input Area */}
         <div className="p-8 border-t border-gray-100 bg-white">
           <form 
             onSubmit={(e) => { e.preventDefault(); handleSend(); }}

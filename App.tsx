@@ -1,11 +1,11 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import CartDrawer from './components/CartDrawer';
-import AIStylist from './components/AIStylist';
-import Checkout from './components/Checkout';
-import { PRODUCTS } from './data/products';
-import { Product, CartItem, AppState } from './types';
+import Navbar from './components/Navbar.tsx';
+import CartDrawer from './components/CartDrawer.tsx';
+import AIStylist from './components/AIStylist.tsx';
+import Checkout from './components/Checkout.tsx';
+import { PRODUCTS } from './data/products.ts';
+import { Product, CartItem, AppState } from './types.ts';
 import { ChevronRight, ChevronLeft, Sparkles, ShoppingCart } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -20,7 +20,6 @@ const App: React.FC = () => {
 
   const filteredProducts = filter === 'All' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
   
-  // Safety check to ensure activeIdx is always valid for the current filter
   useEffect(() => {
     if (activeIdx >= filteredProducts.length) {
       setActiveIdx(0);
@@ -89,14 +88,11 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 flex overflow-hidden">
-        {/* Left Section: Showcase */}
         <section className="relative w-full lg:w-3/4 bg-[#f4f4f5] h-full flex items-center justify-center overflow-hidden">
-          {/* Background Decorative Element */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
             <span className="text-[20rem] md:text-[40rem] font-bold leading-none">怪獣</span>
           </div>
 
-          {/* Ghost Images (Left poses) */}
           <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex flex-col space-y-6 md:space-y-12 opacity-30 z-0">
             <div className="w-20 md:w-40 aspect-[3/4] overflow-hidden rounded bg-gray-200 shadow-sm transition-all duration-700">
                <img key={`ghost-1-${product.id}`} src={product.image} className="w-full h-full object-cover grayscale brightness-110" alt="Pose 1" />
@@ -106,7 +102,6 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Display Model */}
           <div className="relative z-10 w-full h-full flex items-center justify-center px-4 md:px-20 pointer-events-none">
             <img 
               key={product.id}
@@ -116,7 +111,6 @@ const App: React.FC = () => {
             />
           </div>
 
-          {/* Slider Controls */}
           <div className="absolute left-6 md:left-32 bottom-20 flex items-center space-x-4 text-[10px] font-bold tracking-widest text-gray-400 z-30 bg-white/50 backdrop-blur-sm p-2 rounded md:bg-transparent">
              <button 
                onClick={(e) => { e.stopPropagation(); prevProduct(); }} 
@@ -133,13 +127,11 @@ const App: React.FC = () => {
              </button>
           </div>
 
-          {/* Vertical Text */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 rotate-90 origin-right mr-10 whitespace-nowrap hidden lg:block select-none">
             <span className="text-[10px] font-bold tracking-[0.5em] text-gray-400 uppercase">View Collections</span>
             <div className="inline-block w-12 h-[1px] bg-black ml-4 align-middle"></div>
           </div>
 
-          {/* Navigation Circle Button (Right-side) */}
           <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-30">
              <button 
                onClick={(e) => { e.stopPropagation(); nextProduct(); }}
@@ -149,7 +141,6 @@ const App: React.FC = () => {
              </button>
           </div>
 
-          {/* Action Bar */}
           <div className="absolute left-0 bottom-0 flex h-20 w-full max-w-sm shadow-xl z-20">
             <button 
               onClick={() => addToCart(product)}
@@ -164,7 +155,6 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Right Section: Details (Hidden on small screens) */}
         <section className="hidden lg:flex w-1/4 bg-white h-full border-l border-gray-100 flex-col p-12 overflow-y-auto z-40">
           <div className="mb-12">
             <div className="aspect-[3/4] bg-gray-50 mb-8 overflow-hidden rounded shadow-sm">
@@ -200,7 +190,6 @@ const App: React.FC = () => {
         </section>
       </main>
 
-      {/* Overlays */}
       <CartDrawer 
         isOpen={state.isCartOpen} 
         onClose={() => setState(prev => ({ ...prev, isCartOpen: false }))}
